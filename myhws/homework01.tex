@@ -1,0 +1,111 @@
+% Search for all the places that say "PUT SOMETHING HERE".
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,textcomp,amssymb,geometry,graphicx,enumerate}
+
+\def\Name{ lijingqi }  % Your name
+\def\SID{ None }  % Your student ID number
+\def\Homework{ HW01 } % Number of Homework
+\def\Session{Spring 2020}
+
+
+\title{CS170--Spring 2020 --- Homework \Homework Solutions}
+\author{\Name, SID \SID}
+\markboth{CS170--\Session\  Homework \Homework\ \Name}{CS170--\Session\ Homework \Homework\ \Name}
+\pagestyle{myheadings}
+\date{}
+
+\newenvironment{qparts}{\begin{enumerate}[{(}a{)}]}{\end{enumerate}}
+\def\endproofmark{$\Box$}
+\newenvironment{proof}{\par{\bf Proof}:}{\endproofmark\smallskip}
+
+\textheight=9in
+\textwidth=6.5in
+\topmargin=-.75in
+\oddsidemargin=0.25in
+\evensidemargin=0.25in
+
+
+\begin{document}
+\maketitle
+
+Collaborators: NONE
+
+\section*{1. Q1}
+pass
+\section*{2. Q2}
+pass
+\section*{3. Q3}
+pass
+\section*{4. Asymptotic Complexity Comparisons}
+
+\begin{qparts}
+\item answer:
+
+note there are some equation
+
+$ f_4(n) =2^{\log_{2}{n}} = n $
+
+$ f_5(n) = \sqrt{n} =  n^{\frac{1}{2}} $
+
+so result is :
+
+$ f_3,f_7,f_2,f_5,f_4,f_9,f_8,f_6,f_1 $
+
+\item answer:
+
+\begin{enumerate}[i.]
+    \item
+    \begin{equation}
+        f(n) = \log_3{n} = \frac{\lg{n}}{lg{3}}  \label{1}
+    \end{equation}
+
+    \begin{equation}
+        g(n) = \log_4{n} = \frac{\lg{n}}{lg{4}}  \label{2}
+    \end{equation}
+    
+    because equaiton (1) and (2) diff only a constant factor so  $ f(n) = \Theta(g) $
+    
+    \item
+    \begin{equation}
+        f(n) = n\log{n^4} = 4n\log{n}  \label{3}
+    \end{equation}
+    
+    \begin{equation}
+        g(n) = n^2\log{n^3} = 3n^2\log{n}  \label{4}
+    \end{equation}
+    
+    because equation (4) has the higher degree, so $ f(n) = \mathcal{O}(g) $
+    
+    \item
+    \begin{equation}
+        f(n) = \sqrt{n} = n^{\frac{1}{2}} \label{5}
+    \end{equation}
+    
+    \begin{equation}
+        g(n) = (\log{n})^3  \label{6}
+    \end{equation}
+    
+    because any polynomial dominates a product of logs, so $ f(n) = \Omega{(g)} $
+    
+    \item
+    \begin{equation}
+        f(n) = n + \log{n} \label{5}
+    \end{equation}
+    
+    \begin{equation}
+        g(n) = n + (\log{n})^2  \label{6}
+    \end{equation}
+    
+    both f and g grow as $ \Theta(n) $ because the linear term dominates the other, so  $ f(n) = \Theta(g) $
+
+\end{enumerate}
+\end{qparts}
+
+\section*{5. Computing Factorials}
+pass
+
+\section*{6. Polynomial Evaluation}
+pass
+
+\end{document}
