@@ -2,6 +2,26 @@
 
 \documentclass[11pt]{article}
 \usepackage{amsmath,textcomp,amssymb,geometry,graphicx,enumerate}
+\usepackage{color}
+\usepackage{listings}
+\lstset{ %
+language=C++,                % choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,           % adds a frame around the code
+tabsize=2,          % sets default tabsize to 2 spaces
+captionpos=b,           % sets the caption-position to bottom
+breaklines=true,        % sets automatic line breaking
+breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)}          % if you want to add a comment within your code
+}
 
 \def\Name{ lijingqi }  % Your name
 \def\SID{ None }  % Your student ID number
@@ -31,11 +51,11 @@
 
 Collaborators: NONE
 
-\section*{1. Q1}
+\section*{1.}
 pass
-\section*{2. Q2}
+\section*{2.}
 pass
-\section*{3. Q3}
+\section*{3.}
 pass
 \section*{4. Asymptotic Complexity Comparisons}
 
@@ -76,7 +96,7 @@ $ f_3,f_7,f_2,f_5,f_4,f_9,f_8,f_6,f_1 $
     \end{equation}
     
     because equation (4) has the higher degree, so $ f(n) = \mathcal{O}(g) $
-    
+
     \item
     \begin{equation}
         f(n) = \sqrt{n} = n^{\frac{1}{2}} \label{5}
@@ -103,9 +123,98 @@ $ f_3,f_7,f_2,f_5,f_4,f_9,f_8,f_6,f_1 $
 \end{qparts}
 
 \section*{5. Computing Factorials}
-pass
+\begin{qparts}
+
+\item Find an $ f(N) $ so that $ N! $ is $ \Theta(f(N)) $ bits long
+
+m bit number multiply n bit number will get a ( m + n ) bit number
+
+upper bound
+
+$ 1 * 2 * 3 * 4  ...  N $
+
+$ totalbit = \sum_{i=1}^{N}\lg{i} $
+
+$ totalbit < \sum_{i=1}^{N}\lg{N} = N\lg{N} $
+
+lower bound
+
+$ N/2 * (N/2+1) * (N/2+2) * ... N $
+
+because N/2 has least $ \lg{N} -1 $ bits 
+
+$ \lg{N/2} + \lg{(N/2+1)} + \lg{(N/2+2)} .. + \lg{N}  >  (N/2)(\lg{N}-1) $
+
+so the bit number is $ f(n) = N\lg{N} $, this means that our number has  $ \Theta{(N\lg{N})} $ bits.
+
+\item Give a naive algorithm to compute $ N! $
+
+\begin{lstlisting}
+long factorial(int N) {
+    long res = 1;
+    for(int i = 1; i <= N; i++) {
+        res *= i;
+    }
+    return res;
+}
+\end{lstlisting}
+
+Running time:
+
+because res at most $ N\lg{N} $ bit, i at most $ \lg{N} $ bit, so one iteration unit time is $ N(\lg{N})^2 $.
+there are $ n $ iterations, so running time is $ \mathcal{O}(N^2(\lg{N})^2) $.
+\end{qparts}
 
 \section*{6. Polynomial Evaluation}
-pass
+
+\begin{qparts}
+
+\item Describe a naive algorithm that given $ [a_0,...,a_n] $ and $ x $, computes $ p_(x) $
+
+\begin{lstlisting}
+res eval([a0... an], x) {
+    res = 0;
+    for(int i = 0; i < N; i++) {
+        res += ai*x^i;
+    }
+    return res;
+}
+\end{lstlisting}
+
+It takes i time to compute $ x^i $ on the $ i $th iteration. There are $ n $ iterations. so $ \sum_{i=0}^{N}i = \mathcal{O}(n^2) $.
+
+\item Horner's method
+
+\begin{lstlisting}
+res eval([a0... an], x) {
+    res = an;
+    for(int i = 1; i <= N; i++) {
+        res = res * x + an-i
+    }
+    return res;
+}
+\end{lstlisting}
+
+Proof:
+
+at first iteration
+
+$ res_{1} = a_{n-1} + a_nx $
+
+at $k-1$ th iteration
+
+$ res_{k-1} = a_{n-k+1} + x(a_{a-k+2} + ... x(a_{n-1} + xa_n)) $
+
+at $k$ th iteration
+
+$ res_{k} = a_{n-k} + res_{k-1}x $
+
+after $ n $th loop iteration , it will have computed the expression $ a_{0} + x(a_{1} + x(a_{2} + x(a_{3} +...+ x(a_{n-1} + xa_{n})))) = \sum_{i=0}^{N}a_{i}x^{i} $
+
+when compute $ res_{k} $, the $ res_{k-1} $ already has been compute, so every iteration does an addition and a multiplication, spending constant cost, so running time is $ \mathcal{O}(n) $.
+
+\end{qparts}
+
+about (a) and (b) are all Polynomial Evaluation algorithm, we can see algorithm is faster than (a).
 
 \end{document}
